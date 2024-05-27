@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -8,6 +10,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final Animation<AlignmentGeometry> _yolotransetion;
+
+  late final Animation<AlignmentGeometry> _redansetion;
+  @override
+  void initState() {
+    _yolotransetion = Tween<AlignmentGeometry>(
+            begin: Alignment.topCenter, end: Alignment.bottomCenter)
+        .animate(parent);
+    _redansetion = Tween<AlignmentGeometry>(
+            begin: Alignment.centerLeft, end: Alignment.centerRight)
+        .animate(parent);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,30 +41,18 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _stskWiget() {
-    Animation<double> scaleTransition =
-        Tween<double>(begin: 1, end: 10).animate(parent);
-Animation<AlignmentGeometry> animationalignm=
-Tween<AlignmentGeometry>().animate(parent);
-Animation<RelativeRect> animationposined= RelativeRectTween().animate();
     return Expanded(
         child: Stack(
       children: [
-        ScaleTransition(scale: scaleTransition),
-
-AlignTransition(alignment: animationalignm, child: child),
-
-PositionedTransition(rect: animationposined, child: child),
-
-
-        const Align(
-          alignment: Alignment.topCenter,
-          child: CircleAvatar(
+        AlignTransition(
+          alignment: _yolotransetion,
+          child: const CircleAvatar(
             backgroundColor: Colors.amber,
           ),
         ),
-        const Align(
-          alignment: Alignment.centerLeft,
-          child: CircleAvatar(
+        AlignTransition(
+          alignment: _redansetion,
+          child: const CircleAvatar(
             backgroundColor: Colors.red,
           ),
         ),
